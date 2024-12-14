@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Prediksi Kanker Payudara</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+
+        .navbar {
+            background-color: #4CAF50;
+            overflow: hidden;
+            padding: 14px 20px;
+        }
+
+        .navbar a {
+            float: left;
+            display: block;
+            color: white;
+            text-align: center;
+            padding: 14px 16px;
+            text-decoration: none;
+        }
+
+        .navbar a:hover {
+            background-color: #45a049;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        header img {
+            max-width: 100px;
+        }
+
+        .title {
+            font-size: 40px;
+            color: #4CAF50;
+            font-weight: bold;
+            margin: 20px 0;
+        }
+
+        .subheader {
+            font-size: 30px;
+            color: #4CAF50;
+            margin-bottom: 20px;
+        }
+
+        .description {
+            font-size: 18px;
+            text-align: justify;
+            margin-top: 20px;
+            color: #555;
+        }
+
+        .form-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            background-color: #fff;
+            border-radius: 10px;
+            padding: 20px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            margin-bottom: 20px;
+        }
+
+        .form-container input {
+            padding: 10px;
+            margin: 5px;
+            width: 200px;
+            font-size: 16px;
+            border-radius: 5px;
+            border: 1px solid #ddd;
+        }
+
+        .form-container button {
+            padding: 10px 20px;
+            margin-top: 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        .form-container button:hover {
+            background-color: #45a049;
+        }
+
+        .error {
+            color: red;
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .result {
+            font-size: 24px;
+            color: #4CAF50;
+            text-align: center;
+        }
+
+        .image-container {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+
+        .image-container img {
+            max-width: 600px;
+            width: 100%;
+            border-radius: 10px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <a href="/">Klasifikasi Kanker Payudara</a>
+        <a href="/visualize_tree">Visualisasi Decision Tree</a>
+    </div>
+
+    <div class="container">
+        <header>
+            <img src="{{ url_for('static', filename='images/logo.webp') }}" alt="Logo">
+            <h1 class="title">Prediksi Kanker Payudara</h1>
+        </header>
+
+        <div class="image-container">
+            <img src="{{ url_for('static', filename='images/breast_cancer_image.jpg') }}" alt="Kanker Payudara">
+        </div>
+
+        <div class="description">
+            Masukkan nilai fitur dari sampel untuk memprediksi apakah kanker tersebut jinak atau ganas.
+            Cukup masukkan angka antara 1 hingga 10 untuk setiap fitur. Ini akan membantu dokter dalam menentukan diagnosis awal. Yang diisikan dalam fitur
+            ini adalah ketebalan setiap cellnya dalam (cm)
+        </div>
+
+        <div class="form-container">
+            <form method="POST">
+                <label for="clump_thickness">Clump Thickness</label>
+                <input type="text" name="clump_thickness" placeholder="Clump Thickness" value="1"><br>
+
+                <label for="uniformity_of_cell_size">Uniformity of Cell Size</label>
+                <input type="text" name="uniformity_of_cell_size" placeholder="Uniformity of Cell Size" value="1"><br>
+
+                <label for="uniformity_of_cell_shape">Uniformity of Cell Shape</label>
+                <input type="text" name="uniformity_of_cell_shape" placeholder="Uniformity of Cell Shape" value="1"><br>
+
+                <label for="marginal_adhesion">Marginal Adhesion</label>
+                <input type="text" name="marginal_adhesion" placeholder="Marginal Adhesion" value="1"><br>
+
+                <label for="single_epithelial_cell_size">Single Epithelial Cell Size</label>
+                <input type="text" name="single_epithelial_cell_size" placeholder="Single Epithelial Cell Size" value="1"><br>
+
+                <label for="bare_nuclei">Bare Nuclei</label>
+                <input type="text" name="bare_nuclei" placeholder="Bare Nuclei" value="1"><br>
+
+                <label for="bland_chromatin">Bland Chromatin</label>
+                <input type="text" name="bland_chromatin" placeholder="Bland Chromatin" value="1"><br>
+
+                <label for="normal_nucleoli">Normal Nucleoli</label>
+                <input type="text" name="normal_nucleoli" placeholder="Normal Nucleoli" value="1"><br>
+
+                <label for="mitoses">Mitoses</label>
+                <input type="text" name="mitoses" placeholder="Mitoses" value="1"><br>
+
+                <button type="submit">Prediksi</button>
+            </form>
+
+            {% if result %}
+                <div class="result">{{ result }}</div>
+            {% elif error %}
+                <div class="error">{{ error }}</div>
+            {% endif %}
+        </div>
+    </div>
+</body>
+</html>
